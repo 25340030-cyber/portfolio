@@ -396,6 +396,104 @@ button.shake{ animation:shake .25s; background:#140000; border-color:#440; }
   100%{box-shadow:0 0 0px rgba(120,0,0,0);}
 }
 body.corrupt-high{ animation:corruptPulse 2.5s ease-in-out infinite; }
+
+/* ── 씬1 이미지 ── */
+#scene1-image{
+  position:fixed; inset:0; z-index:0;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 1.2s ease;
+}
+#scene1-image img{
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+}
+#scene1-image.visible{ opacity:1; }
+
+/* ── 씬2 이미지 ── */
+#scene2-image{
+  position:fixed; inset:0; z-index:0;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 1.2s ease;
+}
+#scene2-image img{
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+}
+#scene2-image.visible{ opacity:1; }
+
+/* ── 씬3 이미지 ── */
+#scene3-image{
+  position:fixed; inset:0; z-index:0;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 1.2s ease;
+}
+#scene3-image img{
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+}
+#scene3-image.visible{ opacity:1; }
+
+/* ── 씬4 이미지 ── */
+#scene4-image{
+  position:fixed; inset:0; z-index:0;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 1.2s ease;
+}
+#scene4-image img{
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+}
+#scene4-image.visible{ opacity:1; }
+
+/* ── 씬5 이미지 ── */
+#scene5-image{
+  position:fixed; inset:0; z-index:0;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 1.2s ease;
+}
+#scene5-image img{
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+}
+#scene5-image.visible{ opacity:1; }
+
+/* ── 씬6 이미지 ── */
+#scene6-image{
+  position:fixed; inset:0; z-index:0;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 1.2s ease;
+}
+#scene6-image img{
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+}
+#scene6-image.visible{ opacity:1; }
+
+/* ── 씬7 이미지 ── */
+#scene7-image{
+  position:fixed; inset:0; z-index:0;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 1.2s ease;
+}
+#scene7-image img{
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+}
+#scene7-image.visible{ opacity:1; }
 </style>
 </head>
  
@@ -418,6 +516,41 @@ body.corrupt-high{ animation:corruptPulse 2.5s ease-in-out infinite; }
   <button id="tr-next">▶ &nbsp;계속</button>
 </div>
  
+<!-- 씬1 배경 이미지 -->
+<div id="scene1-image">
+  <img src="{c1}_{s1}_{v1}.png" alt="씬1 배경">
+</div>
+
+<!-- 씬2 배경 이미지 -->
+<div id="scene2-image">
+  <img src="{c2}_{s2}_{v1}.png" alt="씬2 배경">
+</div>
+
+<!-- 씬3 배경 이미지 -->
+<div id="scene3-image">
+  <img src="{c3}_{s3}_{v1}.png" alt="씬3 배경">
+</div>
+
+<!-- 씬4 배경 이미지 -->
+<div id="scene4-image">
+  <img src="{c4}_{s4}_{v1}.png" alt="씬4 배경">
+</div>
+
+<!-- 씬5 배경 이미지 -->
+<div id="scene5-image">
+  <img src="{c5}_{s5}_{v1}.png" alt="씬5 배경">
+</div>
+
+<!-- 씬6 배경 이미지 -->
+<div id="scene6-image">
+  <img src="{c6}_{s6}_{v1}.png" alt="씬6 배경">
+</div>
+
+<!-- 씬7 배경 이미지 -->
+<div id="scene7-image">
+  <img src="{c7}_{s7}_{v1}.png" alt="씬7 배경">
+</div>
+
 <!-- 게임 본체 -->
 <div id="game-wrapper">
   <div id="dark-overlay"></div>
@@ -755,6 +888,10 @@ function showOtherEnding(label, icon){
    Scenes
 ══════════════════════════════ */
 function scene1(){
+  /* 씬1 이미지 표시 */
+  const s1img = document.getElementById('scene1-image');
+  s1img.classList.add('visible');
+
   renderScene({
     intro:{
       narration:'"이 세계에서는… 얻는 순간, 이미 대가를 치르고 있는 것이다."<br>"하지만 아무것도 얻지 못하면… 살아남을 수 없다."',
@@ -762,13 +899,22 @@ function scene1(){
     },
     dialogue: bubble('player','나','"저건… 자원이다."<br>"…아니면, 저주인가."'),
     choices:[
-      {text:"다가간다",delta:()=>`💰 ${rangeText(10)}  ☠ ${rangeText(5)}  ✨ -${rangeText(2)}`,effect:()=>applyChange({wealth:10,corruption:5,soul:-2}),next:scene2},
-      {text:"떠난다",  delta:()=>`✨ ${rangeText(5)}`,                                          effect:()=>applyChange({soul:5}),                          next:scene2}
+      {text:"다가간다",delta:()=>`💰 ${rangeText(10)}  ☠ ${rangeText(5)}  ✨ -${rangeText(2)}`,effect:()=>{hideScene1Image();applyChange({wealth:10,corruption:5,soul:-2});},next:scene2},
+      {text:"떠난다",  delta:()=>`✨ ${rangeText(5)}`,                                          effect:()=>{hideScene1Image();applyChange({soul:5});},                          next:scene2}
     ]
   });
 }
+
+function hideScene1Image(){
+  const s1img = document.getElementById('scene1-image');
+  s1img.classList.remove('visible');
+}
  
 function scene2(){
+  /* 씬2 이미지 표시 */
+  const s2img = document.getElementById('scene2-image');
+  s2img.classList.add('visible');
+
   renderScene({
     intro:{
       narration:'"이것은 단순한 자원이 아니다."<br>"이것은… 당신의 일부를 대가로 요구한다."',
@@ -776,13 +922,21 @@ function scene2(){
     },
     dialogue: bubble('player','나','"이걸 쓰면… 오늘은 살 수 있다."<br>"…하지만 내일은?"'),
     choices:[
-      {text:"즉시 사용",delta:()=>`💰 ${rangeText(30)}  ☠ ${rangeText(20)}  ✨ -${rangeText(3)}`,effect:()=>applyChange({wealth:30,corruption:20,soul:-3}),next:scene4},
-      {text:"보관",     delta:()=>`✨ ${rangeText(8)}`,                                          effect:()=>applyChange({soul:8}),                          next:scene3}
+      {text:"즉시 사용",delta:()=>`💰 ${rangeText(30)}  ☠ ${rangeText(20)}  ✨ -${rangeText(3)}`,effect:()=>{hideScene2Image();applyChange({wealth:30,corruption:20,soul:-3});},next:scene4},
+      {text:"보관",     delta:()=>`✨ ${rangeText(8)}`,                                          effect:()=>{hideScene2Image();applyChange({soul:8});},                          next:scene3}
     ]
   });
 }
+
+function hideScene2Image(){
+  const s2img = document.getElementById('scene2-image');
+  s2img.classList.remove('visible');
+}
  
 function scene3(){
+  /* 씬3 이미지 표시 */
+  document.getElementById('scene3-image').classList.add('visible');
+
   renderScene({
     intro:{
       narration:'"이 세계는 균형을 요구한다."<br>"너는 이미… 너무 많은 것을 가져가기 시작했다."',
@@ -792,13 +946,16 @@ function scene3(){
       bubble('npc','정령','"조금만 덜 가져라… 그러면 아직 돌아갈 수 있다."')+
       bubble('player','나','"덜 가져가면… 오늘을 버틸 수 없다."'),
     choices:[
-      {text:"따른다", delta:()=>`✨ ${rangeText(15)}  💰 -${rangeText(5)}`,                      effect:()=>applyChange({wealth:-5,soul:15}),               next:scene5},
-      {text:"무시한다",delta:()=>`💰 ${rangeText(25)}  ☠ ${rangeText(20)}  ✨ -${rangeText(3)}`,effect:()=>applyChange({wealth:25,corruption:20,soul:-3}), next:scene5}
+      {text:"따른다", delta:()=>`✨ ${rangeText(15)}  💰 -${rangeText(5)}`,                      effect:()=>{document.getElementById('scene3-image').classList.remove('visible');applyChange({wealth:-5,soul:15});},               next:scene5},
+      {text:"무시한다",delta:()=>`💰 ${rangeText(25)}  ☠ ${rangeText(20)}  ✨ -${rangeText(3)}`,effect:()=>{document.getElementById('scene3-image').classList.remove('visible');applyChange({wealth:25,corruption:20,soul:-3});}, next:scene5}
     ]
   });
 }
  
 function scene4(){
+  /* 씬4 이미지 표시 */
+  document.getElementById('scene4-image').classList.add('visible');
+
   renderScene({
     intro:{
       narration:'"효율은 항상 존재한다."<br>"문제는… 당신이 감당할 수 있느냐지."',
@@ -808,13 +965,16 @@ function scene4(){
       bubble('npc','기록자','"현재 최적 경로: 수확률 137% 증가. 생존 확률… 감소."')+
       bubble('player','나','"그래도… 살아야 한다."'),
     choices:[
-      {text:"계산 따른다",delta:()=>`💰 ×1.8  ☠ ×1.8`,                                          effect:()=>{state.Wealth*=1.8;state.Corruption*=1.8;},     next:scene5},
-      {text:"직감 따른다",delta:()=>`💰 ${rangeText(15)}  ☠ ${rangeText(6)}  ✨ ${rangeText(6)}`,effect:()=>applyChange({wealth:15,corruption:6,soul:6}),  next:scene5}
+      {text:"계산 따른다",delta:()=>`💰 ×1.8  ☠ ×1.8`,                                          effect:()=>{document.getElementById('scene4-image').classList.remove('visible');state.Wealth*=1.8;state.Corruption*=1.8;},     next:scene5},
+      {text:"직감 따른다",delta:()=>`💰 ${rangeText(15)}  ☠ ${rangeText(6)}  ✨ ${rangeText(6)}`,effect:()=>{document.getElementById('scene4-image').classList.remove('visible');applyChange({wealth:15,corruption:6,soul:6});},  next:scene5}
     ]
   });
 }
  
 function scene5(){
+  /* 씬5 이미지 표시 */
+  document.getElementById('scene5-image').classList.add('visible');
+
   renderScene({
     intro:{
       narration:'"너는 너무 많은 것을 가져갔다."<br>"이제… 가져갈 차례다."',
@@ -822,13 +982,16 @@ function scene5(){
     },
     dialogue: bubble('player','나','"여기서 물러나면… 다 잃는다."'),
     choices:[
-      {text:"싸운다",delta:()=>`☠ ${rangeText(20)}  💰 ${rangeText(10)}`,  effect:()=>applyChange({wealth:10,corruption:20}), next:scene6},
-      {text:"숨는다", delta:()=>`💰 -${rangeText(10)}  ✨ ${rangeText(12)}`,effect:()=>applyChange({wealth:-10,soul:12}),      next:scene6}
+      {text:"싸운다",delta:()=>`☠ ${rangeText(20)}  💰 ${rangeText(10)}`,  effect:()=>{document.getElementById('scene5-image').classList.remove('visible');applyChange({wealth:10,corruption:20});}, next:scene6},
+      {text:"숨는다", delta:()=>`💰 -${rangeText(10)}  ✨ ${rangeText(12)}`,effect:()=>{document.getElementById('scene5-image').classList.remove('visible');applyChange({wealth:-10,soul:12});},      next:scene6}
     ]
   });
 }
  
 function scene6(){
+  /* 씬6 이미지 표시 */
+  document.getElementById('scene6-image').classList.add('visible');
+
   renderScene({
     intro:{
       narration:'"이건 기억인가… 아니면 남은 마지막 조각인가."',
@@ -838,13 +1001,16 @@ function scene6(){
       bubble('npc','가족','"괜찮아… 조금 덜 가져도 돼."')+
       bubble('player','나','"…그럴 수 없다."'),
     choices:[
-      {text:"붙잡는다",delta:()=>`✨ ${rangeText(20)}  💰 -${rangeText(10)}`,effect:()=>applyChange({wealth:-10,soul:20}), next:scene7},
-      {text:"무시한다", delta:()=>`☠ ${rangeText(25)}`,                      effect:()=>applyChange({corruption:25}),     next:scene7}
+      {text:"붙잡는다",delta:()=>`✨ ${rangeText(20)}  💰 -${rangeText(10)}`,effect:()=>{document.getElementById('scene6-image').classList.remove('visible');applyChange({wealth:-10,soul:20});}, next:scene7},
+      {text:"무시한다", delta:()=>`☠ ${rangeText(25)}`,                      effect:()=>{document.getElementById('scene6-image').classList.remove('visible');applyChange({corruption:25});},     next:scene7}
     ]
   });
 }
  
 function scene7(){
+  /* 씬7 이미지 표시 */
+  document.getElementById('scene7-image').classList.add('visible');
+
   renderScene({
     intro:{
       narration:'"이제 선택은 하나다."<br>"얼마를 얻을 것인가… 그리고 무엇을 잃을 것인가."',
@@ -852,8 +1018,8 @@ function scene7(){
     },
     dialogue: bubble('player','나','"…여기서 끝내야 한다."'),
     choices:[
-      {text:"유지",delta:()=>`루프 +1`,   effect:()=>{state.Loop++;},             next:ending},
-      {text:"해체",delta:()=>`노드 파괴`, effect:()=>{state.NodeDestroyed=true;}, next:ending}
+      {text:"유지",delta:()=>`루프 +1`,   effect:()=>{document.getElementById('scene7-image').classList.remove('visible');state.Loop++;},             next:ending},
+      {text:"해체",delta:()=>`노드 파괴`, effect:()=>{document.getElementById('scene7-image').classList.remove('visible');state.NodeDestroyed=true;}, next:ending}
     ]
   });
 }
