@@ -599,7 +599,9 @@ body.corrupt-high{ animation:corruptPulse 2.5s ease-in-out infinite; }
     <div id="choices"></div>
   </div>
 </div>
- 
+ <audio id="bgm" loop>
+  <source src="https://raw.githubusercontent.com/25340030-cyber/portfolio/main/bgm_all.mp3" type="audio/mpeg">
+</audio>
 <script>
 /* ── 다시 시작하기 ── */
 const restartBtn = document.getElementById('restart-btn');
@@ -1051,8 +1053,5 @@ function ending(){
  
 updateUI();
 </script>
- <audio id="bgm" loop>
-  <source src="https://raw.githubusercontent.com/25340030-cyber/portfolio/main/bgm_all.mp3" type="audio/mpeg">
-</audio>
 </body>
 </html>
