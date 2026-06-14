@@ -620,6 +620,7 @@ let gameStarted = false;
 cover.addEventListener('click', startGame);
 function startGame(){
   if(gameStarted) return; gameStarted = true;
+ document.getElementById('bgm').play();
   cover.classList.add('hiding');
   cover.addEventListener('animationend',()=>{cover.style.display='none';},{once:true});
   gameWrapper.classList.add('visible');
