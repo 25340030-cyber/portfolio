@@ -5,3 +5,6 @@
 <img src = "{c5}_{s5}_{v1}.png">
 <img src = "{c6}_{s6}_v1.png">
 <img src = "{c7}_{s7}_v1.png">
+<audio id="bgm" loop>
+  <source src="bgm_all.mp3" type="audio/mpeg">
+</audio>
