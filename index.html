@@ -495,6 +495,31 @@ body.corrupt-high{ animation:corruptPulse 2.5s ease-in-out infinite; }
   display:block;
 }
 #scene7-image.visible{ opacity:1; }
+
+#scene1-video,
+#scene2-video,
+#scene5-video{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 1.2s ease;
+}
+
+#scene1-video video,
+#scene2-video video,
+#scene5-video video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+#scene1-video.visible,
+#scene2-video.visible,
+#scene5-video.visible{
+  opacity:1;
+}
 </style>
 </head>
  
@@ -521,10 +546,9 @@ body.corrupt-high{ animation:corruptPulse 2.5s ease-in-out infinite; }
 <div id="scene1-image">
   <img src="{c1}_{s1}_{v1}.png" alt="씬1 배경">
 </div>
- <!-- 씬1 영상 -->
-<div id="scene1-video">
+ <div id="scene1-video">
   <video autoplay muted loop>
-    <source src="s1_v.mp4" type="video/mp4">
+    <source src="https://25340030-cyber.github.io/portfolio/s1_v.mp4" type="video/mp4">
   </video>
 </div>
 
@@ -534,7 +558,7 @@ body.corrupt-high{ animation:corruptPulse 2.5s ease-in-out infinite; }
 </div>
  <div id="scene2-video">
   <video autoplay muted loop>
-    <source src="s2_v" type="video/mp4">
+    <source src="https://25340030-cyber.github.io/portfolio/s2_v.mp4" type="video/mp4">
   </video>
 </div>
 
@@ -552,10 +576,9 @@ body.corrupt-high{ animation:corruptPulse 2.5s ease-in-out infinite; }
 <div id="scene5-image">
   <img src="{c5}_{s5}_{v1}.png" alt="씬5 배경">
 </div>
- <!-- 씬5 영상 -->
-<div id="scene5-video">
+ <div id="scene5-video">
   <video autoplay muted loop>
-    <source src="s5_v.mp4" type="video/mp4">
+    <source src="https://25340030-cyber.github.io/portfolio/s5_v.mp4" type="video/mp4">
   </video>
 </div>
 
@@ -912,6 +935,7 @@ function scene1(){
   /* 씬1 이미지 표시 */
   const s1img = document.getElementById('scene1-image');
   s1img.classList.add('visible');
+ document.getElementById('scene1-video').classList.add('visible');
 
   renderScene({
     intro:{
@@ -929,12 +953,14 @@ function scene1(){
 function hideScene1Image(){
   const s1img = document.getElementById('scene1-image');
   s1img.classList.remove('visible');
+  document.getElementById('scene1-video').classList.remove('visible');
 }
  
 function scene2(){
   /* 씬2 이미지 표시 */
   const s2img = document.getElementById('scene2-image');
   s2img.classList.add('visible');
+  document.getElementById('scene2-video').classList.add('visible');
 
   renderScene({
     intro:{
@@ -952,6 +978,7 @@ function scene2(){
 function hideScene2Image(){
   const s2img = document.getElementById('scene2-image');
   s2img.classList.remove('visible');
+  document.getElementById('scene2-video').classList.remove('visible');
 }
  
 function scene3(){
@@ -976,6 +1003,7 @@ function scene3(){
 function scene4(){
   /* 씬4 이미지 표시 */
   document.getElementById('scene4-image').classList.add('visible');
+ 
 
   renderScene({
     intro:{
@@ -995,6 +1023,7 @@ function scene4(){
 function scene5(){
   /* 씬5 이미지 표시 */
   document.getElementById('scene5-image').classList.add('visible');
+  document.getElementById('scene5-video').classList.add('visible');
 
   renderScene({
     intro:{
@@ -1003,8 +1032,8 @@ function scene5(){
     },
     dialogue: bubble('player','나','"여기서 물러나면… 다 잃는다."'),
     choices:[
-      {text:"싸운다",delta:()=>`☠ ${rangeText(20)}  💰 ${rangeText(10)}`,  effect:()=>{document.getElementById('scene5-image').classList.remove('visible');applyChange({wealth:10,corruption:20});}, next:scene6},
-      {text:"숨는다", delta:()=>`💰 -${rangeText(10)}  ✨ ${rangeText(12)}`,effect:()=>{document.getElementById('scene5-image').classList.remove('visible');applyChange({wealth:-10,soul:12});},      next:scene6}
+      {text:"싸운다",delta:()=>`☠ ${rangeText(20)}  💰 ${rangeText(10)}`,  effect:()=>{document.getElementById('scene5-image').classList.remove('visible');document.getElementById('scene5-video').classList.remove('visible');applyChange({wealth:10,corruption:20});}, next:scene6},
+      {text:"숨는다", delta:()=>`💰 -${rangeText(10)}  ✨ ${rangeText(12)}`,effect:()=>{document.getElementById('scene5-image').classList.remove('visible');document.getElementById('scene5-video').classList.remove('visible');applyChange({wealth:-10,soul:12});},      next:scene6}
     ]
   });
 }
